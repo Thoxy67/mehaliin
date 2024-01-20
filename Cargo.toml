@@ -2,7 +2,11 @@
 name = "mehaliin"
 version = "0.1.0"
 edition = "2021"
-
+authors = ["thoxy"]
+license = "MIT"
+description = "Internal Memory Hacking Library for Rust"
+repository = "https://github.com/Thoxy67/mehaliin"
+readme = "README.md"
 
 [package.metadata.docs.rs]
 default-target = "x86_64-pc-windows-msvc"
