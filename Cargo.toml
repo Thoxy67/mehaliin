@@ -3,9 +3,23 @@ name = "mehaliin"
 version = "0.1.0"
 edition = "2021"
 
+
 [package.metadata.docs.rs]
 default-target = "x86_64-pc-windows-msvc"
-targets = ["x86_64-pc-windows-msvc"]
+targets = [
+    "x86_64-pc-windows-msvc",
+    "x86_64-pc-windows-msvc",
+    "i686-pc-windows-msvc",
+    "i686-pc-windows-gnu",
+]
+
+[build]
+targets = [
+    "x86_64-pc-windows-msvc",
+    "x86_64-pc-windows-gnu",
+    "i686-pc-windows-msvc",
+    "i686-pc-windows-gnu",
+]
 
 [features]
 default = [
