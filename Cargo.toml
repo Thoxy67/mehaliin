@@ -8,15 +8,6 @@ description = "Internal Memory Hacking Library for Rust"
 repository = "https://github.com/Thoxy67/mehaliin"
 readme = "README.md"
 
-[package.metadata.docs.rs]
-default-target = "x86_64-pc-windows-msvc"
-targets = [
-    "x86_64-pc-windows-msvc",
-    "x86_64-pc-windows-msvc",
-    "i686-pc-windows-msvc",
-    "i686-pc-windows-gnu",
-]
-
 [build]
 targets = [
     "x86_64-pc-windows-msvc",
@@ -57,7 +48,6 @@ windows = { version = "0.52.0", features = [
     "Win32_System_LibraryLoader",
 ] }
 
-
 [build-dependencies]
 cc = "1.0.83"
 
@@ -71,3 +61,23 @@ strip = true    # Automatically strip symbols from the binary.
 opt-level = "z" # Optimize for size.
 lto = true
 panic = "abort"
+
+[package.metadata.docs.rs]
+features = [
+    "Memory",
+    "Injector",
+    "Memory_Utils",
+    "Memory_Read",
+    "Memory_Write",
+    "Injector_Utils",
+    "Injector_LoadLibraryA",
+]
+no-default-features = true
+all-features = true
+default-target = "x86_64-pc-windows-msvc"
+targets = [
+    "x86_64-pc-windows-msvc",
+    "x86_64-pc-windows-msvc",
+    "i686-pc-windows-msvc",
+    "i686-pc-windows-gnu",
+]
