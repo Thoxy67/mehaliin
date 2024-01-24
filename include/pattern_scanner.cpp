@@ -25,13 +25,11 @@ extern "C"
     // https://github.com/OneshotGH/CSGOSimple-master/blob/master/CSGOSimple/helpers/utils.cpp
     std::uint8_t *pattern_scan(const char *signature, const char *module_name)
     {
-
         HMODULE hmodule = get_default_hmodule(module_name);
         MODULEINFO modInfo = {nullptr, 0, nullptr};
 
         if (GetModuleInformation(GetCurrentProcess(), hmodule, &modInfo, sizeof(MODULEINFO)))
         {
-
             static auto pattern_to_byte = [](const char *pattern)
             {
                 auto bytes = std::vector<int>{};
@@ -65,6 +63,8 @@ extern "C"
             auto s = patternBytes.size();
             auto d = patternBytes.data();
 
+            u_long x = 0;
+
             for (auto i = 0ul; i < sizeOfImage - s; ++i)
             {
                 bool found = true;
@@ -73,6 +73,7 @@ extern "C"
                 {
                     if (scanBytes[i + j] != d[j] && d[j] != -1)
                     {
+                        x += 1;
                         found = false;
                         break;
                     }

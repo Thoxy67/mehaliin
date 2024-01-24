@@ -12,17 +12,19 @@ fn main() {
         panic!("Platform '{sys}' not supported.");
     }
 
-    let memc = Path::new(&root_dir).join("include");
+    if cfg!(FFI_PATERN_SCAN) {
+        let memc = Path::new(&root_dir).join("include");
 
-    cc::Build::new()
-        .cpp(true)
-        .opt_level_str("z")
-        .file(memc.join("pattern_scanner.cpp"))
-        .compile("pattern_scanner.a");
+        cc::Build::new()
+            .cpp(true)
+            .opt_level_str("z")
+            .file(memc.join("pattern_scanner.cpp"))
+            .compile("pattern_scanner.a");
 
-    println!("cargo:rerun-if-changed=include");
-    println!(
-        "cargo:rustc-link-search=native={}",
-        env::var("OUT_DIR").unwrap()
-    );
+        println!("cargo:rerun-if-changed=include");
+        println!(
+            "cargo:rustc-link-search=native={}",
+            env::var("OUT_DIR").unwrap()
+        );
+    }
 }

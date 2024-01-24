@@ -36,6 +36,8 @@ Memory_Pattern_Scan = [] # Only Memory Patter_Scan functions
 
 Injector_Utils = [] # Only Injector Utils functions
 Injector_LoadLibraryA = [] # Only Injector LoadLibraryA functions
+
+FFI_PATERN_SCAN = [] # Replace the Rust pattern Scan with c++ ffi one (faster)
 ```
 
 Now you can use it in you project.
