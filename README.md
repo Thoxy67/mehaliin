@@ -4,6 +4,12 @@ Welcome to MeHaLiIn, an acronym derived from "Me" for Memory, "Ha" for Hacking, 
 
 I chose this name over InMeHaLi for its smoother pronunciation.
 
+
+[![Crates.io License](https://img.shields.io/crates/l/mehaliin)](LICENSE)
+[![Crates.io Version](https://img.shields.io/crates/v/mehaliin)](https://crates.io/crates/mehaliin)
+![Crates.io Total Downloads](https://img.shields.io/crates/d/mehaliin)
+[![docs.rs](https://img.shields.io/docsrs/mehaliin)](https://docs.rs/crate/mehaliin/latest)
+
 ## Overview
 
 MeHaLiIn is a Rust library designed for internal memory manipulation, offering functionalities such as internal memory reading, 
