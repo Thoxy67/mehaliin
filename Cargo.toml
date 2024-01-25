@@ -1,6 +1,6 @@
 [package]
 name = "mehaliin"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 authors = ["thoxy"]
 license = "MIT"
@@ -35,7 +35,7 @@ Memory_Pattern_Scan = []
 Injector = ["Injector_Utils", "Injector_LoadLibraryA"]
 Injector_Utils = []
 Injector_LoadLibraryA = []
-CPP_PATERN_SCAN = []
+CPP_PATTERN_SCAN = []
 
 [dependencies]
 sysinfo = "0.30.5"
