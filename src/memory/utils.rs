@@ -33,12 +33,14 @@ pub fn get_current_base_address() -> Result<(*const c_void, u32, String), String
             let base_name = String::from_utf8_lossy(&b.szModule).to_string();
             b.dwSize;
             return Ok((base_address, base_size, base_name));
-        },
+        }
         Err(_) => {
-            return Err(
-                format!("Error failed to enum process modules {}", std::process::id()).to_string()
-            );
-        },
+            return Err(format!(
+                "Error failed to enum process modules {}",
+                std::process::id()
+            )
+            .to_string());
+        }
     };
 }
 
@@ -68,7 +70,10 @@ pub fn get_module_base_address(module: &str) -> Result<(*const c_void, u32, Stri
     b.dwSize = std::mem::size_of::<MODULEENTRY32>() as u32;
     match unsafe { Module32First(a, &mut b) } {
         Ok(_) => {
-            if String::from_utf8_lossy(&b.szModule).to_lowercase().contains(&module_name) {
+            if String::from_utf8_lossy(&b.szModule)
+                .to_lowercase()
+                .contains(&module_name)
+            {
                 let base_address: *const c_void = b.modBaseAddr.cast();
                 let base_size = b.modBaseSize;
                 let base_name = String::from_utf8_lossy(&b.szModule).to_string();
@@ -88,20 +93,24 @@ pub fn get_module_base_address(module: &str) -> Result<(*const c_void, u32, Stri
                                 b.dwSize;
                                 return Ok((base_address, base_size, base_name));
                             }
-                        },
+                        }
                         Err(_) => break,
                     };
                 }
 
-                return Err(format!("Error failed to find module base address : {}", module_name)
-                    .to_string());
+                return Err(
+                    format!("Error failed to find module base address : {}", module_name)
+                        .to_string(),
+                );
             }
-        },
+        }
         Err(_) => {
-            return Err(
-                format!("Error failed to enum process modules {}", std::process::id()).to_string()
-            );
-        },
+            return Err(format!(
+                "Error failed to enum process modules {}",
+                std::process::id()
+            )
+            .to_string());
+        }
     };
 }
 

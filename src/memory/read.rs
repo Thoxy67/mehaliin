@@ -127,6 +127,26 @@ unsafe impl ReadFromMemory for f64 {
     }
 }
 
+unsafe impl ReadFromMemory for isize {
+    fn read_from_memory(address: usize) -> Self {
+        (unsafe { *((address) as *const Self) }) as Self
+    }
+
+    fn read_from_memory_sized(address: usize, _size: usize) -> Self {
+        return Self::read_from_memory(address);
+    }
+}
+
+unsafe impl ReadFromMemory for usize {
+    fn read_from_memory(address: usize) -> Self {
+        (unsafe { *((address) as *const Self) }) as Self
+    }
+
+    fn read_from_memory_sized(address: usize, _size: usize) -> Self {
+        return Self::read_from_memory(address);
+    }
+}
+
 // Implementation for slices of bytes (&[u8])
 unsafe impl ReadFromMemory for &[u8] {
     fn read_from_memory_sized(address: usize, size: usize) -> Self {

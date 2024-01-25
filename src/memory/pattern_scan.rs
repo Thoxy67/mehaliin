@@ -2,7 +2,7 @@ use windows::core::PCSTR;
 use windows::Win32::Foundation::HMODULE;
 use windows::Win32::System::LibraryLoader::{GetModuleHandleA, GetModuleHandleW};
 
-#[cfg(feature = "CPP_PATERN_SCAN")]
+#[cfg(feature = "CPP_PATTERN_SCAN")]
 extern "C" {
     #[link_name = "pattern_scan"]
     fn u_pattern_scan(
@@ -58,7 +58,7 @@ extern "C" {
 /// function. Additionally, the returned values must not be used after the
 /// current process has been terminated or modified in ways that affect
 /// memory layout.
-#[cfg(feature = "CPP_PATERN_SCAN")]
+#[cfg(feature = "CPP_PATTERN_SCAN")]
 pub fn pattern_scan(pattern: &str, module_name: Option<&str>) -> usize {
     let pattern = std::ffi::CString::new(pattern).expect("CString::new failed");
     match module_name {
@@ -136,7 +136,7 @@ pub fn pattern_scan(pattern: &str, module_name: Option<&str>) -> usize {
 /// function. Additionally, the returned values must not be used after the
 /// current process has been terminated or modified in ways that affect
 /// memory layout.
-#[cfg(feature = "CPP_PATERN_SCAN")]
+#[cfg(feature = "CPP_PATTERN_SCAN")]
 pub fn pattern_pointer_scan(
     pattern: &str,
     module_name: Option<&str>,
@@ -288,7 +288,7 @@ pub fn pattern_to_bytes(pattern: &str) -> Vec<i32> {
 /// function. Additionally, the returned values must not be used after the
 /// current process has been terminated or modified in ways that affect
 /// memory layout.
-#[cfg(not(feature = "CPP_PATERN_SCAN"))]
+#[cfg(not(feature = "CPP_PATTERN_SCAN"))]
 pub fn pattern_scan(pattern: &str, module_name: Option<&str>) -> usize {
     let hmodule = get_hmodule(module_name);
     let mut modulei = windows::Win32::System::ProcessStatus::MODULEINFO::default();
@@ -387,7 +387,7 @@ pub fn pattern_scan(pattern: &str, module_name: Option<&str>) -> usize {
 /// function. Additionally, the returned values must not be used after the
 /// current process has been terminated or modified in ways that affect
 /// memory layout.
-#[cfg(not(feature = "CPP_PATERN_SCAN"))]
+#[cfg(not(feature = "CPP_PATTERN_SCAN"))]
 pub fn pattern_pointer_scan(
     pattern: &str,
     module_name: Option<&str>,

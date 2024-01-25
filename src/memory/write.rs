@@ -83,6 +83,18 @@ unsafe impl WriteToMemory for f64 {
     }
 }
 
+unsafe impl WriteToMemory for usize {
+    fn write_to_memory(address: usize, value: Self) {
+        unsafe { ptr::from_exposed_addr_mut::<Self>(address).write(value) };
+    }
+}
+
+unsafe impl WriteToMemory for isize {
+    fn write_to_memory(address: usize, value: Self) {
+        unsafe { ptr::from_exposed_addr_mut::<Self>(address).write(value) };
+    }
+}
+
 /// Caution: This code assumes the use of ASCII characters only. ⚠️
 ///
 /// To handle strings with a different character encoding, first convert the
