@@ -23,6 +23,12 @@ pub unsafe trait WriteToMemory {
         Self: Sized;
 }
 
+unsafe impl WriteToMemory for bool {
+    fn write_to_memory(address: usize, value: Self) {
+        unsafe { ptr::from_exposed_addr_mut::<Self>(address).write(value) };
+    }
+}
+
 unsafe impl WriteToMemory for u8 {
     fn write_to_memory(address: usize, value: Self) {
         unsafe { ptr::from_exposed_addr_mut::<Self>(address).write(value) };
@@ -105,7 +111,7 @@ unsafe impl WriteToMemory for String {
         let b: &[u8] = value.as_bytes();
 
         for i in 0..value.len() - 1 {
-            unsafe { std::ptr::from_exposed_addr_mut::<u8>(address + i).write_bytes(b[i], 1) };
+            unsafe { std::ptr::from_exposed_addr_mut::<u8>(address + i).write(b[i]) };
         }
     }
 }
@@ -113,7 +119,79 @@ unsafe impl WriteToMemory for String {
 unsafe impl WriteToMemory for &[u8] {
     fn write_to_memory(address: usize, value: Self) {
         for i in 0..value.len() - 1 {
-            unsafe { std::ptr::from_exposed_addr_mut::<u8>(address + i).write_bytes(value[i], 1) };
+            unsafe { std::ptr::from_exposed_addr_mut::<u8>(address + i).write(value[i]) };
+        }
+    }
+}
+
+unsafe impl WriteToMemory for &[u16] {
+    fn write_to_memory(address: usize, value: Self) {
+        for i in 0..value.len() - 1 {
+            unsafe { std::ptr::from_exposed_addr_mut::<u16>(address + i).write(value[i]) };
+        }
+    }
+}
+
+unsafe impl WriteToMemory for &[u32] {
+    fn write_to_memory(address: usize, value: Self) {
+        for i in 0..value.len() - 1 {
+            unsafe { std::ptr::from_exposed_addr_mut::<u32>(address + i).write(value[i]) };
+        }
+    }
+}
+
+unsafe impl WriteToMemory for &[u64] {
+    fn write_to_memory(address: usize, value: Self) {
+        for i in 0..value.len() - 1 {
+            unsafe { std::ptr::from_exposed_addr_mut::<u64>(address + i).write(value[i]) };
+        }
+    }
+}
+
+unsafe impl WriteToMemory for &[i8] {
+    fn write_to_memory(address: usize, value: Self) {
+        for i in 0..value.len() - 1 {
+            unsafe { std::ptr::from_exposed_addr_mut::<i8>(address + i).write(value[i]) };
+        }
+    }
+}
+
+unsafe impl WriteToMemory for &[i16] {
+    fn write_to_memory(address: usize, value: Self) {
+        for i in 0..value.len() - 1 {
+            unsafe { std::ptr::from_exposed_addr_mut::<i16>(address + i).write(value[i]) };
+        }
+    }
+}
+
+unsafe impl WriteToMemory for &[i32] {
+    fn write_to_memory(address: usize, value: Self) {
+        for i in 0..value.len() - 1 {
+            unsafe { std::ptr::from_exposed_addr_mut::<i32>(address + i).write(value[i]) };
+        }
+    }
+}
+
+unsafe impl WriteToMemory for &[i64] {
+    fn write_to_memory(address: usize, value: Self) {
+        for i in 0..value.len() - 1 {
+            unsafe { std::ptr::from_exposed_addr_mut::<i64>(address + i).write(value[i]) };
+        }
+    }
+}
+
+unsafe impl WriteToMemory for &[f32] {
+    fn write_to_memory(address: usize, value: Self) {
+        for i in 0..value.len() - 1 {
+            unsafe { std::ptr::from_exposed_addr_mut::<f32>(address + i).write(value[i]) };
+        }
+    }
+}
+
+unsafe impl WriteToMemory for &[f64] {
+    fn write_to_memory(address: usize, value: Self) {
+        for i in 0..value.len() - 1 {
+            unsafe { std::ptr::from_exposed_addr_mut::<f64>(address + i).write(value[i]) };
         }
     }
 }

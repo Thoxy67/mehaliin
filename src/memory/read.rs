@@ -27,6 +27,16 @@ pub unsafe trait ReadFromMemory {
     fn read_from_memory_sized(address: usize, size: usize) -> Self;
 }
 
+unsafe impl ReadFromMemory for bool {
+    fn read_from_memory(address: usize) -> Self {
+        (unsafe { *((address) as *const Self) }) as Self
+    }
+
+    fn read_from_memory_sized(address: usize, _size: usize) -> Self {
+        return Self::read_from_memory(address);
+    }
+}
+
 unsafe impl ReadFromMemory for u8 {
     fn read_from_memory(address: usize) -> Self {
         (unsafe { *((address) as *const Self) }) as Self
@@ -155,6 +165,105 @@ unsafe impl ReadFromMemory for &[u8] {
 
     fn read_from_memory(_address: usize) -> Self {
         panic!("read_from_memory need to bee sized for &[u8] use read_from_memory_sized instead");
+    }
+}
+
+// Implementation for slices of bytes (&[u16])
+unsafe impl ReadFromMemory for &[u16] {
+    fn read_from_memory_sized(address: usize, size: usize) -> Self {
+        unsafe { slice::from_raw_parts(address as *const u16, size) }
+    }
+
+    fn read_from_memory(_address: usize) -> Self {
+        panic!("read_from_memory need to bee sized for &[u16] use read_from_memory_sized instead");
+    }
+}
+
+// Implementation for slices of bytes (&[u32])
+unsafe impl ReadFromMemory for &[u32] {
+    fn read_from_memory_sized(address: usize, size: usize) -> Self {
+        unsafe { slice::from_raw_parts(address as *const u32, size) }
+    }
+
+    fn read_from_memory(_address: usize) -> Self {
+        panic!("read_from_memory need to bee sized for &[u32] use read_from_memory_sized instead");
+    }
+}
+
+// Implementation for slices of bytes (&[u64])
+unsafe impl ReadFromMemory for &[u64] {
+    fn read_from_memory_sized(address: usize, size: usize) -> Self {
+        unsafe { slice::from_raw_parts(address as *const u64, size) }
+    }
+
+    fn read_from_memory(_address: usize) -> Self {
+        panic!("read_from_memory need to bee sized for &[u64] use read_from_memory_sized instead");
+    }
+}
+
+// Implementation for slices of bytes (&[i8])
+unsafe impl ReadFromMemory for &[i8] {
+    fn read_from_memory_sized(address: usize, size: usize) -> Self {
+        unsafe { slice::from_raw_parts(address as *const i8, size) }
+    }
+
+    fn read_from_memory(_address: usize) -> Self {
+        panic!("read_from_memory need to bee sized for &[i8] use read_from_memory_sized instead");
+    }
+}
+
+// Implementation for slices of bytes (&[i16])
+unsafe impl ReadFromMemory for &[i16] {
+    fn read_from_memory_sized(address: usize, size: usize) -> Self {
+        unsafe { slice::from_raw_parts(address as *const i16, size) }
+    }
+
+    fn read_from_memory(_address: usize) -> Self {
+        panic!("read_from_memory need to bee sized for &[i16] use read_from_memory_sized instead");
+    }
+}
+
+// Implementation for slices of bytes (&[i32])
+unsafe impl ReadFromMemory for &[i32] {
+    fn read_from_memory_sized(address: usize, size: usize) -> Self {
+        unsafe { slice::from_raw_parts(address as *const i32, size) }
+    }
+
+    fn read_from_memory(_address: usize) -> Self {
+        panic!("read_from_memory need to bee sized for &[i32] use read_from_memory_sized instead");
+    }
+}
+
+// Implementation for slices of bytes (&[i64])
+unsafe impl ReadFromMemory for &[i64] {
+    fn read_from_memory_sized(address: usize, size: usize) -> Self {
+        unsafe { slice::from_raw_parts(address as *const i64, size) }
+    }
+
+    fn read_from_memory(_address: usize) -> Self {
+        panic!("read_from_memory need to bee sized for &[i64] use read_from_memory_sized instead");
+    }
+}
+
+// Implementation for slices of bytes (&[i32])
+unsafe impl ReadFromMemory for &[f32] {
+    fn read_from_memory_sized(address: usize, size: usize) -> Self {
+        unsafe { slice::from_raw_parts(address as *const f32, size) }
+    }
+
+    fn read_from_memory(_address: usize) -> Self {
+        panic!("read_from_memory need to bee sized for &[f32] use read_from_memory_sized instead");
+    }
+}
+
+// Implementation for slices of bytes (&[i64])
+unsafe impl ReadFromMemory for &[f64] {
+    fn read_from_memory_sized(address: usize, size: usize) -> Self {
+        unsafe { slice::from_raw_parts(address as *const f64, size) }
+    }
+
+    fn read_from_memory(_address: usize) -> Self {
+        panic!("read_from_memory need to bee sized for &[f64] use read_from_memory_sized instead");
     }
 }
 
